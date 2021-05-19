@@ -8,16 +8,32 @@ use Illuminate\Http\Request;
 class movie {
     public $title;
     public $description;
-    public function __construct($first,$second){
+    public function __construct($first,$second='null'){
         $this -> title= $first;
         $this -> description= $second;
+        if($second==='null'){
+            $this -> description='Empty';
+        }
+
+    }
+    public function get_string(){
+        return $this->title.'  '.$this->description;
     }
 }
 class controller_new extends Controller
 {
     public function oop(){
-        $movie_new= new movie('ciao','ola');
-        dd($movie_new);
+        $movie_new1= new movie('ola');
+        $movie_new2= new movie('viola','georgia');
+        $movie_new3= new movie('cipresso');
+        $movie_new4= new movie('eolian','leromerlin');
+        $arr=[$movie_new1,$movie_new2,$movie_new3,$movie_new4];
+        $str='';
+        foreach($arr as $a)
+        $str.=$a->get_string()."\n";
+
+        dd($str);
+        // dd($movie_new, $movie_new->get_string());
 
 
 
